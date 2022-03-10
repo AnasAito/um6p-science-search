@@ -97,9 +97,9 @@ export default function Paper({
             {/* Testimonial card*/}
 
             <div
-              className={`bg-gradient-to-r ${
-                gradients[parseInt(cluster)]
-              } relative     rounded-2xl shadow-xl overflow-hidden`}
+              className={` ${
+                colors[parseInt(cluster)]
+              } relative  rounded-2xl shadow-xl overflow-hidden`}
             >
               <Graph
                 cluster={cluster}
