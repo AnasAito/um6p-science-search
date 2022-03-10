@@ -1,7 +1,7 @@
 import React from 'react';
 import um_cl from '../icons/um_cl_2.png';
 import Menu from '../components/combobox';
-export default function Search({ setCluster }) {
+export default function Search({ setCluster, setHighlight }) {
   return (
     <div className="pt-8 overflow-hidden sm:pt-12 lg:relative lg:py-48">
       <div className="mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-8 lg:max-w-7xl lg:grid lg:grid-cols-2 lg:gap-24">
@@ -30,7 +30,7 @@ export default function Search({ setCluster }) {
                 <label htmlFor="hero-email" className="sr-only">
                   query
                 </label>
-                <Menu setCluster={setCluster} />
+                <Menu setCluster={setCluster} setHighlight={setHighlight} />
               </div>
               <div className="mt-4 sm:mt-0 sm:ml-3">
                 <button

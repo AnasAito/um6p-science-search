@@ -77,13 +77,20 @@ const footerNavigation = {
 export default function Example() {
   const [paperId, setPaperId] = useState('WOS:000689613200001');
   const [cluster, setCluster] = useState('1');
-  console.log(cluster);
+  const [highlight, setHighlight] = useState(null);
+
   return (
     <div className="bg-white">
       <main>
-        <Search setCluster={setCluster} />
+        <Search setCluster={setCluster} setHighlight={setHighlight} />
 
-        <Paper cluster={cluster} paperId={paperId} setPaperId={setPaperId} />
+        <Paper
+          cluster={cluster}
+          paperId={paperId}
+          setPaperId={setPaperId}
+          highlight={highlight}
+          setHighlight={setHighlight}
+        />
 
         <Similar paperId={paperId} />
       </main>

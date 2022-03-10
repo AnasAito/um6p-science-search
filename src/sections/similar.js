@@ -6,7 +6,7 @@ export default function Similar({ paperId }) {
   const [similarPapers, setSimilarPapers] = React.useState([]);
   useEffect(() => {
     console.log(paperId);
-    const path = `http://127.0.0.1:8000/get_neighbors/?paper_id=${paperId}&k=6`;
+    const path = `https://4y5fot.deta.dev/get_neighbors/?paper_id=${paperId}&k=6`;
 
     axios
       .post(path)

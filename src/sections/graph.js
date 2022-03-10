@@ -38,8 +38,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 
   return null;
 };
-const Graph = ({ cluster, setPaperId }) => {
-  const [highlight, setHighlight] = React.useState(null);
+const Graph = ({ cluster, setPaperId, highlight, setHighlight }) => {
   return (
     <ResponsiveContainer width="100%" height={500}>
       <ScatterChart
@@ -68,8 +67,10 @@ const Graph = ({ cluster, setPaperId }) => {
               opacity={0.5}
               onClick={(data) => {
                 setPaperId(data.paperId);
+
                 // get paper cordinate by paperId
                 const point = papers[data.paperId]['embedding_proj'];
+
                 setHighlight([
                   {
                     x: point[0],

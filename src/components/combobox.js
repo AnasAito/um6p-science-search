@@ -17,13 +17,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Example({ setCluster }) {
+export default function Example({ setCluster, setHighlight }) {
   const [selected, setSelected] = useState(people[3]);
   // use effect to set the cluster
   useEffect(() => {
     // stringify the selected item
 
     setCluster(JSON.stringify(selected.id));
+    setHighlight(null);
   }, [selected]);
 
   return (

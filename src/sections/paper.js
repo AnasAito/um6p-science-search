@@ -6,7 +6,13 @@ const stats = [
   { label: 'Citations', value: '5' },
 ];
 
-export default function Paper({ cluster, paperId, setPaperId }) {
+export default function Paper({
+  cluster,
+  paperId,
+  setPaperId,
+  highlight,
+  setHighlight,
+}) {
   return (
     <div className="relative mt-20">
       {
@@ -68,7 +74,12 @@ export default function Paper({ cluster, paperId, setPaperId }) {
             {/* Testimonial card*/}
 
             <div className="bg-gradient-to-r from-purple-800 to-indigo-700 relative     rounded-2xl shadow-xl overflow-hidden">
-              <Graph cluster={cluster} setPaperId={setPaperId} />
+              <Graph
+                cluster={cluster}
+                setPaperId={setPaperId}
+                highlight={highlight}
+                setHighlight={setHighlight}
+              />
             </div>
             <p>graph title </p>
           </div>
