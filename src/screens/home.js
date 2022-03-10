@@ -90,6 +90,7 @@ export default function Example() {
           setPaperId={setPaperId}
           highlight={highlight}
           setHighlight={setHighlight}
+          setCluster={setCluster}
         />
 
         <Similar paperId={paperId} />

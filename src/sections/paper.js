@@ -1,6 +1,7 @@
 import React from 'react';
 import Graph from './graph';
 import papers from '../data/papers_f';
+import Clusters from '../components/clusters';
 const stats = [
   { label: 'Published', value: '2021' },
   { label: 'Citations', value: '5' },
@@ -12,7 +13,29 @@ export default function Paper({
   setPaperId,
   highlight,
   setHighlight,
+  setCluster,
 }) {
+  const colors = {
+    1: 'bg-red-200',
+    2: 'bg-cyan-200',
+    3: 'bg-yellow-200',
+    4: 'bg-green-200',
+    8: 'bg-blue-200',
+    9: 'bg-indigo-200',
+    7: 'bg-purple-200',
+  };
+
+  const grad_num = [100, 300];
+  const gradients = {
+    1: `from-red-${grad_num[0]} to-red-${grad_num[1]}`,
+    2: `from-cyan-${grad_num[0]} to-cyan-${grad_num[1]}`,
+    3: `from-yellow-${grad_num[0]} to-yellow-${grad_num[1]}`,
+    4: `from-green-${grad_num[0]} to-green-${grad_num[1]}`,
+    8: `from-blue-${grad_num[0]} to-blue-${grad_num[1]}`,
+    9: `from-indigo-${grad_num[0]} to-indigo-${grad_num[1]}`,
+    7: `from-purple-${grad_num[0]} to-purple-${grad_num[1]}`,
+  };
+
   return (
     <div className="relative mt-20">
       {
@@ -73,7 +96,11 @@ export default function Paper({
           <div className="  relative mx-auto max-w-md px-4 sm:max-w-3xl sm:px-6 lg:px-0 lg:max-w-none lg:py-20">
             {/* Testimonial card*/}
 
-            <div className="bg-gradient-to-r from-purple-800 to-indigo-700 relative     rounded-2xl shadow-xl overflow-hidden">
+            <div
+              className={`bg-gradient-to-r ${
+                gradients[parseInt(cluster)]
+              } relative     rounded-2xl shadow-xl overflow-hidden`}
+            >
               <Graph
                 cluster={cluster}
                 setPaperId={setPaperId}
@@ -81,7 +108,7 @@ export default function Paper({
                 setHighlight={setHighlight}
               />
             </div>
-            <p>graph title </p>
+            <Clusters setCluster={setCluster} setHighlight={setHighlight} />
           </div>
         </div>
 

@@ -12,19 +12,6 @@ import {
 import { get } from 'lodash';
 import clusters from '../data/papers_plot';
 import papers from '../data/papers_f';
-/* Array */
-const colors = [
-  'ffd400',
-  '541388',
-  '970b78',
-  'd90368',
-  'fff',
-  'ebb0be',
-  'f1e9da',
-  '908994',
-  '2e294e',
-  '977f27',
-];
 
 const CustomTooltip = ({ active, payload, label }) => {
   const paperId = get(payload, '[0].payload.paperId', '');
@@ -89,7 +76,7 @@ const Graph = ({ cluster, setPaperId, highlight, setHighlight }) => {
                   size: 50,
                 };
               })}
-              fill={`#${'fff'}`}
+              fill={`#${'000'}`}
             />
           );
         })}
