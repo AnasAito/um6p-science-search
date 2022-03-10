@@ -1,64 +1,42 @@
-import React from "react";
-const blogPosts = [
-  {
-    id: 1,
-    title: "Boost your conversion rate",
-    href: "#",
-    date: "Mar 16, 2020",
-    datetime: "2020-03-16",
-    category: { name: "Article", href: "#" },
-    imageUrl:
-      "https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80",
-    preview:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto accusantium praesentium eius, ut atque fuga culpa, similique sequi cum eos quis dolorum.",
-    author: {
-      name: "Roel Aufderehar",
-      imageUrl:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      href: "#",
-    },
-    readingLength: "6 min",
-  },
-  {
-    id: 2,
-    title: "How to use search engine optimization to drive sales",
-    href: "#",
-    date: "Mar 10, 2020",
-    datetime: "2020-03-10",
-    category: { name: "Article", href: "#" },
-    imageUrl:
-      "https://images.unsplash.com/photo-1547586696-ea22b4d4235d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80",
-    preview:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit facilis asperiores porro quaerat doloribus, eveniet dolore. Adipisci tempora aut inventore optio animi., tempore temporibus quo laudantium.",
-    author: {
-      name: "Brenna Goyette",
-      imageUrl:
-        "https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      href: "#",
-    },
-    readingLength: "4 min",
-  },
-  {
-    id: 3,
-    title: "Improve your customer experience",
-    href: "#",
-    date: "Feb 12, 2020",
-    datetime: "2020-02-12",
-    category: { name: "Article", href: "#" },
-    imageUrl:
-      "https://images.unsplash.com/photo-1492724441997-5dc865305da7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80",
-    preview:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint harum rerum voluptatem quo recusandae magni placeat saepe molestiae, sed excepturi cumque corporis perferendis hic.",
-    author: {
-      name: "Daniela Metz",
-      imageUrl:
-        "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-      href: "#",
-    },
-    readingLength: "11 min",
-  },
-];
-export default function Similar() {
+import React, { useEffect } from 'react';
+import papers from '../data/papers_f';
+const axios = require('axios');
+
+export default function Similar({ paperId }) {
+  const [similarPapers, setSimilarPapers] = React.useState([]);
+  useEffect(() => {
+    console.log(paperId);
+    const path = `http://127.0.0.1:8000/get_neighbors/?paper_id=${paperId}&k=6`;
+
+    axios
+      .post(path)
+      .then((res) => {
+        console.log('RESPONSE RECEIVED: ', res.data);
+        setSimilarPapers(
+          res.data.map((paper_id) => {
+            return {
+              id: paper_id,
+              title: papers[paper_id]['title'],
+              preview: papers[paper_id]['abstarct'],
+              date: parseInt(papers[paper_id]['pub_year']),
+              readingLength: '',
+
+              category: { name: 'Article', href: '#' },
+              author: {
+                name: `${papers[paper_id]['authors'][0]} et al.`,
+                imageUrl:
+                  'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+                href: '#',
+              },
+            };
+          })
+        );
+      })
+      .catch((err) => {
+        console.log('AXIOS ERROR: ', err);
+        setSimilarPapers([]);
+      });
+  }, [paperId]);
   return (
     <div className="relative bg-white py-16 sm:py-24 lg:py-32">
       <div className="relative">
@@ -75,11 +53,11 @@ export default function Similar() {
             condimentum id viverra nulla.
           </p>
         </div>
-        <div className="mt-12 mx-auto max-w-md px-4 grid gap-8 sm:max-w-lg sm:px-6 lg:px-8 lg:grid-cols-3 lg:max-w-7xl">
-          {blogPosts.map((post) => (
+        <div className="mt-12 mx-auto max-w-md px-4 grid gap-8 sm:max-w-lg sm:px-6 lg:px-8 lg:grid-cols-2 lg:max-w-7xl">
+          {similarPapers.map((post) => (
             <div
               key={post.id}
-              className="flex flex-col rounded-lg shadow-lg overflow-hidden"
+              className="flex flex-col no-underline  rounded-lg shadow-lg overflow-hidden"
             >
               <div className="flex-1 bg-white p-6 flex flex-col justify-between">
                 <div className="flex-1">
@@ -88,14 +66,14 @@ export default function Similar() {
                       {post.category.name}
                     </a>
                   </p>
-                  <a href={post.href} className="block mt-2">
-                    <p className="text-xl font-semibold text-gray-900">
+                  <div href={post.href} className="block mt-2">
+                    <p className="text-xl font-semibold no-underline text-gray-900">
                       {post.title}
                     </p>
-                    <p className="mt-3 text-base text-gray-500">
+                    <p className="mt-3 text-base text-ellipsis  no-underline  text-gray-500">
                       {post.preview}
                     </p>
-                  </a>
+                  </div>
                 </div>
                 <div className="mt-6 flex items-center">
                   <div className="flex-shrink-0">

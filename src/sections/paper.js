@@ -1,10 +1,12 @@
-import React from "react";
-import Graph from "./graph";
+import React from 'react';
+import Graph from './graph';
+import papers from '../data/papers_f';
 const stats = [
-  { label: "Published", value: "2021" },
-  { label: "Citations", value: "5" },
+  { label: 'Published', value: '2021' },
+  { label: 'Citations', value: '5' },
 ];
-export default function Paper() {
+
+export default function Paper({ cluster, paperId, setPaperId }) {
   return (
     <div className="relative mt-20">
       {
@@ -66,7 +68,7 @@ export default function Paper() {
             {/* Testimonial card*/}
 
             <div className="bg-gradient-to-r from-purple-800 to-indigo-700 relative     rounded-2xl shadow-xl overflow-hidden">
-              <Graph />
+              <Graph cluster={cluster} setPaperId={setPaperId} />
             </div>
             <p>graph title </p>
           </div>
@@ -76,37 +78,23 @@ export default function Paper() {
           {/* Content area */}
           <div className="pt-12 sm:pt-16 lg:pt-20">
             <h2 className="text-3xl text-gray-900 font-extrabold tracking-tight sm:text-4xl">
-              General trends in fertilisers use in the world
+              {papers[paperId].title}
             </h2>
             <div className="mt-6 text-gray-500 space-y-6">
-              <p className="text-lg">
-                We consider the trends in the use of nitrogen (N), phosphorus
-                (P), and potassium (K) fertilizers in the 15 largest countries
-                from a population perspective. We use a growth curve modelling
-                approach because of the temporal dimension of the analysis. We
-                show that there is a general upward trend in the use of N and K
-                fertilizers per unit of harvested land, with average rates of
-                increase 0.93 and 0.64 kg/ha/year, respectively. However, there
-                is no statistical evidence to show that the same trend holds for
-                P fertilizers. There is a significant variation in growth
-                between the 15 countries for all three fertilizers. For
-                instance, Egypt and China show a higher starting level for
-                fertilizer use in the study sample, and China’s fertilizer use
-                intensity continues to increase in all three categories of
-                fertilizers; at the same time, Japan has been reducing its use
-                intensity for the three categories. This indicates greater
-                opportunities for exchanging best practices in fertilizer use
-                and management and provides basis for future requirement of
-                fertilizers and promoting the use of alternative methods of
-                farming
-              </p>
+              <p className="text-lg">{papers[paperId].abstarct}</p>
             </div>
           </div>
 
           {/* Stats section */}
           <div className="mt-10">
             <dl className="grid grid-cols-2 gap-x-4 gap-y-8">
-              {stats.map((stat) => (
+              {[
+                {
+                  label: 'Published',
+                  value: parseInt(papers[paperId].pub_year),
+                },
+                { label: 'Citations', value: papers[paperId].citation_count },
+              ].map((stat) => (
                 <div
                   key={stat.label}
                   className="border-t-2 border-gray-100 pt-6"
