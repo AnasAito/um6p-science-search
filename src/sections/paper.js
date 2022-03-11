@@ -47,9 +47,8 @@ export default function Paper({
             Paper Details
           </p>
           <p className="mt-5 mx-auto max-w-prose text-xl text-gray-500">
-            Phasellus lorem quam molestie id quisque diam aenean nulla in.
-            Accumsan in quis quis nunc, ullamcorper malesuada. Eleifend
-            condimentum id viverra nulla.
+            Choose a semantic cluster , pinpoint any paper in the map using your
+            cursor and learn more about it.
           </p>
         </div>
       }
@@ -147,7 +146,10 @@ export default function Paper({
               ))}
             </dl>
             <div className="mt-10">
-              <a href="#" className="text-base font-medium text-indigo-500">
+              <a
+                href={`https://www.webofscience.com/wos/woscc/full-record/${paperId}`}
+                className="text-base font-medium text-indigo-500"
+              >
                 Learn more about the paper &rarr;
               </a>
             </div>

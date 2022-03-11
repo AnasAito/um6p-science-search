@@ -12,7 +12,7 @@ export default function Search() {
           <div>
             <img
               className="h-11 w-auto"
-              src="https://tailwindui.com/img/logos/workflow-mark.svg?color=indigo&shade=500"
+              src="https://tailwindui.com/img/logos/workflow-mark.svg?color=blue&shade=500"
               alt="Workflow"
             />
           </div>
@@ -20,12 +20,13 @@ export default function Search() {
             <div></div>
             <div className="mt-6 sm:max-w-xl">
               <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
-                UM6P scientific papers explorer
+                UM6P scientific papers{' '}
+                <span className="text-blue-600">Explorer</span>
               </h1>
               <p className="mt-6 text-xl text-gray-500">
                 Find similar papers to your query from{' '}
                 <span className="text-black font-bold ">1000+</span> papers
-                using semantic search.
+                using <span class="text-blue-500">semantic search.</span>
               </p>
             </div>
             {/* <form action="#" className="mt-12 sm:max-w-lg sm:w-full sm:flex">
